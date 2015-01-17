@@ -16,6 +16,10 @@ private:
     QMenuBar *menuBar;
     QMenu *fileMenu;
     QMenu *helpMenu;
+
+    QAction *openAction;
+    QAction *exitAction;
+    QAction *aboutAction;
 signals:
 
 public slots:
