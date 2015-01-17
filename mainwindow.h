@@ -15,7 +15,7 @@ public:
 private:
     QMenuBar *menuBar;
     QMenu *fileMenu;
-
+    QMenu *helpMenu;
 signals:
 
 public slots:
