@@ -6,6 +6,7 @@
 #include <QActionGroup>
 #include <QMenuBar>
 #include <QMenu>
+#include "imagewidget.h"
 
 class mainwindow : public QMainWindow
 {
@@ -20,6 +21,8 @@ private:
     QAction *openAction;
     QAction *exitAction;
     QAction *aboutAction;
+
+    ImageWidget *image;
 signals:
 
 public slots:

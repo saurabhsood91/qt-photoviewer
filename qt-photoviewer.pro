@@ -1,9 +1,11 @@
 SOURCES += \
     main.cpp \
-    mainwindow.cpp
+    mainwindow.cpp \
+    imagewidget.cpp
 
 
 QT+= widgets
 
 HEADERS += \
-    mainwindow.h
+    mainwindow.h \
+    imagewidget.h

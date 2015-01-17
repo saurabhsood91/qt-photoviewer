@@ -31,5 +31,11 @@ mainwindow::mainwindow(QWidget *parent) :
     //Set Window Title
     this->setWindowTitle(tr("Photo Viewer"));
 
+    //Signal Slot Connections
+    connect(exitAction, SIGNAL(triggered()), this, SLOT(close()));
+
+    image = new ImageWidget;
+    setCentralWidget(image);
+
     this->show();
 }
