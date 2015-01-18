@@ -23,7 +23,18 @@ private:
     QAction *aboutAction;
 
     ImageWidget *image;
+
+    //Keep track of the image being displayed
+    int currentIndex = 0;
+
+    //List stores the retrieved images
+    QStringList selectedImages;
+
+
 signals:
+
+private slots:
+    void openFileDialog();
 
 public slots:
 

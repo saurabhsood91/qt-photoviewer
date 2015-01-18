@@ -1,4 +1,6 @@
 #include "mainwindow.h"
+#include <QFileDialog>
+#include <QDebug>
 
 mainwindow::mainwindow(QWidget *parent) :
     QMainWindow(parent)
@@ -33,9 +35,25 @@ mainwindow::mainwindow(QWidget *parent) :
 
     //Signal Slot Connections
     connect(exitAction, SIGNAL(triggered()), this, SLOT(close()));
+    connect(openAction, SIGNAL(triggered()), this, SLOT(openFileDialog()));
 
     image = new ImageWidget;
     setCentralWidget(image);
 
     this->show();
+}
+
+void mainwindow::openFileDialog()
+{
+    QFileDialog mainDialog(this, tr("Select Image Files"));
+    mainDialog.setFileMode(QFileDialog::ExistingFiles);
+    mainDialog.setNameFilter("Images (*.png *.jpg *");
+
+    selectedImages = mainDialog.getOpenFileNames();
+    qDebug() << selectedImages.length();
+    if(selectedImages.length() > 0) {
+        currentIndex = 0;
+        //Load First Image in the list of selected images
+        image->setImage(selectedImages.at(0));
+    }
 }

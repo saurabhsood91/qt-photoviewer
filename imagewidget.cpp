@@ -21,3 +21,9 @@ ImageWidget::ImageWidget(QWidget *parent) :
     this->show();
 
 }
+
+void ImageWidget::setImage(QString path)
+{
+    imageScene->addPixmap(QPixmap(path));
+    imageView->setScene(imageScene);
+}

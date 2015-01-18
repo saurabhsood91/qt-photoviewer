@@ -11,6 +11,7 @@ class ImageWidget : public QWidget
     Q_OBJECT
 public:
     explicit ImageWidget(QWidget *parent = 0);
+    void setImage(QString path);
 
 private:
     //UI Elements
