@@ -4,6 +4,7 @@
 #include <QWidget>
 #include <QGraphicsScene>
 #include <QGraphicsView>
+#include <QDebug>
 #include <QPushButton>
 
 class ImageWidget : public QWidget
@@ -12,6 +13,7 @@ class ImageWidget : public QWidget
 public:
     explicit ImageWidget(QWidget *parent = 0);
     void setImage(QString path);
+    void updateFileList(QStringList list);
 
 private:
     //UI Elements
@@ -19,10 +21,12 @@ private:
     QGraphicsScene *imageScene;
     QPushButton *previousButton;
     QPushButton *nextButton;
+    QStringList items;
+    int currentIndex;
 
-signals:
-
-public slots:
+private slots:
+    void previousClicked();
+    void nextClicked();
 
 };
 
