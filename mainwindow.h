@@ -27,6 +27,7 @@ private:
     //List stores the retrieved images
     QStringList selectedImages;
 
+
 private slots:
     void openFileDialog();
 

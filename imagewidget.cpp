@@ -10,6 +10,10 @@ ImageWidget::ImageWidget(QWidget *parent) :
     previousButton = new QPushButton(tr("<"));
     nextButton = new QPushButton(tr(">"));
 
+    //disable previous and next buttons
+    previousButton->setDisabled(true);
+    nextButton->setDisabled(true);
+
     //Create Layout
     QHBoxLayout *mainLayout = new QHBoxLayout;
     mainLayout->addWidget(previousButton);
@@ -31,6 +35,24 @@ void ImageWidget::setImage(QString path)
 {
     imageScene->addPixmap(QPixmap(path));
     imageView->setScene(imageScene);
+    this->imageView->fitInView(imageScene->sceneRect(), Qt::KeepAspectRatio);
+
+    if(this->items.length() > 1) {
+        this->previousButton->setEnabled(true);
+        this->nextButton->setEnabled(true);
+    }
+
+    if(currentIndex == 0) {
+        this->previousButton->setDisabled(true);
+        if(currentIndex == this->items.length() - 1) {
+            this->nextButton->setDisabled(true);
+        }
+    } else if(currentIndex == this->items.length() - 1) {
+        this->nextButton->setDisabled(true);
+        if(currentIndex == 0) {
+            this->previousButton->setDisabled(true);
+        }
+    }
 }
 
 void ImageWidget::updateFileList(QStringList list)
@@ -46,10 +68,6 @@ void ImageWidget::previousClicked()
     }
     currentIndex--;
     this->setImage(this->items.at(currentIndex));
-    //Enable the next button if not already enabled
-    if(!this->nextButton->isEnabled()) {
-        this->nextButton->setEnabled(true);
-    }
 }
 
 void ImageWidget::nextClicked()
@@ -58,12 +76,4 @@ void ImageWidget::nextClicked()
     currentIndex++;
     //Load Image
     this->setImage(this->items.at(currentIndex));
-    //If items equal to one less than length of items disable button
-    if(currentIndex == this->items.length() - 1) {
-        this->nextButton->setDisabled(true);
-    }
-    //Enable previous
-    if(!this->previousButton->isEnabled()) {
-        this->previousButton->setEnabled(true);
-    }
 }
