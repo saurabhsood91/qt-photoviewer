@@ -52,7 +52,7 @@ void mainwindow::openFileDialog()
     selectedImages = mainDialog.getOpenFileNames();
     qDebug() << selectedImages.length();
     if(selectedImages.length() > 0) {
-        currentIndex = 0;
+        image->updateFileList(selectedImages);
         //Load First Image in the list of selected images
         image->setImage(selectedImages.at(0));
     }
