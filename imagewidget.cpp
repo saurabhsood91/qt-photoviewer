@@ -1,5 +1,6 @@
 #include "imagewidget.h"
 #include <QHBoxLayout>
+#include <QResizeEvent>
 
 ImageWidget::ImageWidget(QWidget *parent) :
     QWidget(parent)
@@ -23,7 +24,7 @@ ImageWidget::ImageWidget(QWidget *parent) :
     connect(previousButton, SIGNAL(clicked()), this, SLOT(previousClicked()));
     connect(nextButton, SIGNAL(clicked()), this, SLOT(nextClicked()));
 
-    this->currentIndex = 0;
+    this->currentIndex = -1;
 
     setLayout(mainLayout);
 
@@ -33,6 +34,9 @@ ImageWidget::ImageWidget(QWidget *parent) :
 
 void ImageWidget::setImage(QString path)
 {
+    if(this->currentIndex == -1) {
+        this->currentIndex = 0;
+    }
     imageScene->addPixmap(QPixmap(path));
     imageView->setScene(imageScene);
     this->imageView->fitInView(imageScene->sceneRect(), Qt::KeepAspectRatio);
@@ -76,4 +80,11 @@ void ImageWidget::nextClicked()
     currentIndex++;
     //Load Image
     this->setImage(this->items.at(currentIndex));
+}
+
+void ImageWidget::resizeEvent(QResizeEvent *e)
+{
+    if(this->currentIndex != -1) {
+        this->imageView->fitInView(this->imageScene->sceneRect(), Qt::KeepAspectRatio);
+    }
 }

@@ -24,6 +24,8 @@ private:
     QStringList items;
     int currentIndex;
 
+    void resizeEvent(QResizeEvent*e);
+
 private slots:
     void previousClicked();
     void nextClicked();
